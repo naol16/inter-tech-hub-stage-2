@@ -39,11 +39,19 @@ const Bookschema=  new mongoose.Schema({
     Title:String,
     Author:String,
     Isbn:  Number,
-
-    
-    Publishedyear: Number
+    Publishedyear: Number,
+    id: Number
 })
  const Book= mongoose.model("book", Bookschema);
+ const counterSchema= new  mongoose.Schema({
+    id : {
+        type:String
+    },
+    sequence :{
+       type:Number
+   }
+ })
+ const countermodel= mongoose.model("counter",counterSchema);
  async function add() {
  try{
  const newbook= new Book(
@@ -63,4 +71,4 @@ const Bookschema=  new mongoose.Schema({
  }
 
 
-module.exports={connection,Book}
+module.exports={connection,Book,countermodel}
