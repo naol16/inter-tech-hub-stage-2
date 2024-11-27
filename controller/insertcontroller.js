@@ -1,4 +1,6 @@
 const {connection,Book,countermodel}=require("../db/model")
+
+//inserting function
  async function add(req,res) {
 connection()
  try{

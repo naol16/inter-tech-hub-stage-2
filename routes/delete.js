@@ -1,3 +1,4 @@
+//deleting route
 const deleting =require("../controller/deletecontroller")
 const express= require("express")
 const router= express.Router()

@@ -1,4 +1,6 @@
 const{connection,Book,countermodel}= require("../db/model")
+
+//deleting function
 async function  deleting (req,res){
 try{
     connection();
