@@ -38,8 +38,8 @@ console.error("there is error",err);
 const Bookschema=  new mongoose.Schema({
     Title:String,
     Author:String,
-    Isbn:  Number,
-    Publishedyear: Number,
+    Isbn:Number,
+    Publishedyear:Number,
     id: Number
 })
  const Book= mongoose.model("book", Bookschema);

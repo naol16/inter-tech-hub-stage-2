@@ -3,9 +3,20 @@ const {connection,Book,countermodel}=require("../db/model")
 connection()
  try{
 const title = req.body.title;
-const author = req.body.Author;
+const Author = req.body.Author;
 const isbn = req.body.isbn;
 const publishedyear=req.body.publishedyear;
+//checking if it is string
+function stringchecker(value){ 
+    return value !==null && value !==undefined && typeof value ==="string";
+  }
+// checking if it is number
+  function numberchecker(value){
+    return value !==null && value !==undefined && !isNaN(value)
+  }
+if (stringchecker(title) && stringchecker(Author) && numberchecker(isbn) && numberchecker(publishedyear)){
+
+// here auto incrementing function to increase id 
  const data= await countermodel.findOneAndUpdate(
     {id : "auto increment"},
     {"$inc":{"sequence":1}},
@@ -23,7 +34,7 @@ if(!data){
  const newbook= new Book(
     {
         Title:title,
-        Author:author,
+        Author:Author,
         Isbn :isbn,
         Publishedyear:publishedyear,
         id:sqid
@@ -34,12 +45,14 @@ if(!data){
      console.log("data",data)
      const savedbook= await newbook.save()
      console.log("stored successfully",savedbook);
-     res.status(500).send("stored successfully");
-    
+     res.status(201).send("stored successfully");
+}
+else{
+    res.status(400).send("you did not include all the data   or the  input you included is not valid")
+}
  }
  catch(error){
     console.log(error);
-    res.status(400).send("there is some problem")
  }
  }
 module.exports=add;
