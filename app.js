@@ -4,13 +4,17 @@ const port =process.env.PORT || 3432
 const app = new express()
 const {connection}= require('./db/model')
 const insert=require('./routes/insert')
+const retrive= require('./routes/retrive')
 connection()
+app.use(express.json())
 app.get('/',(req,res)=>{
 res.send("connected")
 }
 )
 app.use(express.json())
-app.use('/POST/books',insert)
+app.use('/books',insert)
+app.use('/books',retrive)
+
 // app.use(model)
 
 app.listen(port,()=>{
